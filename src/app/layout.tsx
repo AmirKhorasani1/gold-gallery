@@ -1,6 +1,7 @@
+import './globals.css';
 import type { Metadata } from "next";
 import localFont from 'next/font/local';
-import './globals.css';
+import ScrollToTop from "@/utils/ScrollToTop"
 
 const yekanBakh = localFont({
   src: [
@@ -38,7 +39,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fa" dir="rtl" className={`${yekanBakh.variable}`}>
-      <body>{children}</body>
+      <body>
+        {children}
+        <ScrollToTop />
+      </body>
     </html>
   );
 }
