@@ -39,7 +39,7 @@ export default function GoldPrice() {
   }, []);
 
   return (
-    <div className="w-full py-2.5 text-center text-xs font-semibold bg-[#10494b1a]">
+    <div className="w-full py-2.5 text-center text-xs font-semibold bg-[#10494b1a] md:bg-transparent">
       <span className="text-gray-700">قیمت هر گرم طلا ۱۸ عیار :</span>
       {loading ? (
         // Skeleton loader for better UX during initial load
