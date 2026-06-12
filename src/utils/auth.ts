@@ -28,7 +28,7 @@ export const generateAccessToken = (payload: TokenPayload): string => {
   }
   
   // ساخت توکن
-  return sign(payload, secret, {expiresIn: "15m"});
+  return sign(payload, secret, {expiresIn: "55d"});
 };
 
 // بررسی ورود

@@ -22,6 +22,7 @@
       "@/*": ["./src/*"],
       "@/configs/*": ["./configs/*"],
       "@/models/*": ["./models/*"],
+      "@/utils/*": ["./src/utils/*"],
     }
   },
   "include": [
