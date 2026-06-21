@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import { GoHeart } from "react-icons/go";
 import { HiOutlineShoppingBag } from "react-icons/hi2";
@@ -9,22 +11,33 @@ export interface JewelryItem {
   weight: number;
   img: string;
   type: string;
+  colors?: string[];
+  colorsName?: string[];
+  sizes?: string[];
 }
 
 const JewelryCard = ({ id, title, price, weight, img, type }: JewelryItem) => {
   return (
-    <div className="relative bg-white p-3.5 md:p-5 rounded-3xl flex flex-col justify-center transition-all cursor-pointer hover:scale-101 hover:shadow-lg">
-      
+    <Link
+      href={`/product/${id}`}
+      className="relative bg-white p-3.5 md:p-5 rounded-3xl flex flex-col justify-center transition-all cursor-pointer hover:scale-101 hover:shadow-lg"
+    >
       <div className="flex justify-between items-center">
         <p className="text-xs md:text-sm text-neutral-400">#{type}</p>
 
         <div className="flex gap-2.5 md:gap-3 *:hover:text-[#10494b] *:duration-500 text-lg md:text-[22px] text-neutral-400">
-          <GoHeart />
-          <Link href={`/jewelry/${id}`}>
-            <button title="افزودن به سبد خرید">
-              <HiOutlineShoppingBag />
-            </button>
-          </Link>
+          <button
+            onClick={(e) => e.preventDefault()}
+            aria-label="افزودن به علاقه‌مندی‌ها"
+          >
+            <GoHeart />
+          </button>
+          <button
+            onClick={(e) => e.preventDefault()}
+            title="افزودن به سبد خرید"
+          >
+            <HiOutlineShoppingBag />
+          </button>
         </div>
       </div>
 
@@ -50,7 +63,7 @@ const JewelryCard = ({ id, title, price, weight, img, type }: JewelryItem) => {
           {new Intl.NumberFormat("fa-IR").format(price)}
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 
