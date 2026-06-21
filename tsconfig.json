@@ -23,6 +23,7 @@
       "@/configs/*": ["./configs/*"],
       "@/models/*": ["./models/*"],
       "@/utils/*": ["./src/utils/*"],
+      "@/types/*": ["./types/*"],
     }
   },
   "include": [
