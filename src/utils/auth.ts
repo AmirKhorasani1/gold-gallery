@@ -1,17 +1,27 @@
 import { hash, compare } from "bcryptjs";
 import { sign, verify, JwtPayload } from "jsonwebtoken";
+import { cookies } from "next/headers";
+import { Types } from "mongoose";
+import UserModel from "@/models/User";
+import connectToDB from "@/configs/db";
 
 export interface TokenPayload {
   userId: string;
   role: string;
 }
 
-// تبدیل پسورد خام به یک رشته غیرقابل برگشت (امنیت پسورد)
-export const hashPassword = async ( password: string ): Promise<string> => {
+export interface CurrentUser {
+  _id: Types.ObjectId;
+  name: string;
+  phone: string;
+  email?: string;
+  role: string;
+}
+
+export const hashPassword = async (password: string): Promise<string> => {
   return hash(password, 12);
 };
 
-// (امنیت پسورد)
 export const verifyPassword = async (
   password: string,
   hashedPassword: string
@@ -19,68 +29,52 @@ export const verifyPassword = async (
   return compare(password, hashedPassword);
 };
 
-// ساخت توکن ورود
 export const generateAccessToken = (payload: TokenPayload): string => {
   const secret = process.env.AccessTokenSecretKey;
-  
-  if (!secret) {
-    throw new Error("AccessTokenSecretKey is not defined");
-  }
-  
-  // ساخت توکن
-  return sign(payload, secret, {expiresIn: "55d"});
+  if (!secret) throw new Error("AccessTokenSecretKey is not defined");
+  return sign(payload, secret, { expiresIn: "55d" });
 };
 
-// بررسی ورود
 export const verifyAccessToken = (
-  token: string // JWT که از کاربر می‌گیری
-): TokenPayload & JwtPayload => { // ترکیب داده‌های خودت + داده‌های داخلی JWT
+  token: string
+): TokenPayload & JwtPayload => {
   const secret = process.env.AccessTokenSecretKey;
-
-  if (!secret) {
-    throw new Error("AccessTokenSecretKey is not defined");
-  }
-  
-  //آیا این توکن معتبر است؟
+  if (!secret) throw new Error("AccessTokenSecretKey is not defined");
   return verify(token, secret) as TokenPayload & JwtPayload;
 };
 
-// تمدید ورود
 export const generateRefreshToken = (payload: TokenPayload): string => {
   const secret = process.env.RefreshTokenSecretKey;
-
-  if (!secret) {
-    throw new Error("RefreshTokenSecretKey is not defined");
-  }
-
-  return sign(payload, secret, {expiresIn: "7d"});
+  if (!secret) throw new Error("RefreshTokenSecretKey is not defined");
+  return sign(payload, secret, { expiresIn: "7d" });
 };
 
-//بررسی اعتبار refresh token
 export const verifyRefreshToken = (
   token: string
 ): TokenPayload & JwtPayload => {
   const secret = process.env.RefreshTokenSecretKey;
-
-  if (!secret) {
-    throw new Error("RefreshTokenSecretKey is not defined");
-  }
-
+  if (!secret) throw new Error("RefreshTokenSecretKey is not defined");
   return verify(token, secret) as TokenPayload & JwtPayload;
 };
 
-// Validations
-export const isValidEmail = (email: string): boolean => {
-  const emailRegex = /^(?!.*\.\.)[a-zA-Z0-9._%+-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*\.[a-zA-Z]{2,}$/;
-  return emailRegex.test(email.trim());
-};
+export const getCurrentUser = async (): Promise<CurrentUser | null> => {
+  try {
+    const cookieStore = await cookies();
+    const token = cookieStore.get("token");
 
-export const isValidPhone = (phone: string): boolean => {
-  const phoneRegex = /^09\d{9}$/;
-  return phoneRegex.test(phone.trim());
-};
+    if (!token?.value) return null;
 
-export const isValidPassword = (password: string): boolean => {
-  const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
-  return passwordRegex.test(password);
+    const tokenPayload = verifyAccessToken(token.value);
+    if (!tokenPayload?.userId) return null;
+
+    await connectToDB();
+    const user = await UserModel.findById(
+      new Types.ObjectId(tokenPayload.userId)
+    ).lean<CurrentUser>();
+
+    return user ?? null;
+  } catch (err) {
+    console.error("Auth check failed:", err);
+    return null;
+  }
 };

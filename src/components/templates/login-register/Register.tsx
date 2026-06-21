@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import Sms from "./Sms";
-import { isValidEmail, isValidPhone, isValidPassword } from "@/utils/auth"
+import { isValidEmail, isValidPhone, isValidPassword } from "@/utils/validation"
 
 interface RegisterProps {
   onSwitchToLogin: () => void;

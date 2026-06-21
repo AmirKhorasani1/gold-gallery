@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import Sms from "./Sms";
-import { isValidEmail, isValidPhone, isValidPassword } from "@/utils/auth"
+import { isValidEmail, isValidPhone, isValidPassword } from "@/utils/validation"
 
 interface LoginProps {
   onSwitchToRegister: () => void;
