@@ -82,7 +82,7 @@ const MegaMenu = () => {
       onMouseEnter={() => setShowCategories(true)}
       onMouseLeave={() => setShowCategories(false)}
     >
-      <button className="flex cursor-pointer items-center gap-1.5 text-sm font-semibold">
+      <button className="flex cursor-pointer items-center gap-1.5 text-[14.5px] font-semibold">
         دسته بندی جواهرات{" "}
         <IoIosArrowForward className={`${showCategories ? "rotate-270" : "rotate-90"}`} />
       </button>

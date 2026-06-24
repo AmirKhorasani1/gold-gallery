@@ -31,8 +31,8 @@ const UserActions = ({ isLogin, mobileCartOnly = false }: UserActionsProps) => {
 
       {/* ================= CART ================= */}
       <div className="group relative">
-        <button className="relative text-neutral-400 hover:text-neutral-600 duration-500 cursor-pointer mt-2">
-          <IoBagOutline size={25} />
+        <button className="relative text-neutral-500 hover:text-neutral-900 duration-500 cursor-pointer mt-2">
+          <IoBagOutline size={27} />
           <span className="absolute -left-1.5 md:-left-2 top-0 md:-top-1 w-3.5 h-3.5 md:h-4.5 md:w-4.5 rounded-4xl bg-[#10494b] pt-1 text-[10px] md:text-[11.5px] text-white flex items-center justify-center">
             ۲
           </span>
@@ -106,16 +106,16 @@ const UserActions = ({ isLogin, mobileCartOnly = false }: UserActionsProps) => {
             /* ── Not logged in ── */
             <Link
               href="/login-register"
-              className="flex w-35 cursor-pointer items-center justify-center gap-1.5 rounded-2xl border-2 border-[#10494b] py-2.5 text-sm font-medium text-[#10494b] transition duration-300 hover:bg-[#10494b1d] bg-white [word-spacing:-1px]"
+              className="flex w-36 cursor-pointer items-center justify-center gap-1.5 rounded-xl py-3 text-sm font-semibold border border-[#10494b] text-[#10494b] hover:bg-[#10494b] hover:text-white transition duration-300"
             >
-              <LuLogIn size={19} />
+              <LuLogIn size={22} />
               ورود | ثبت نام
             </Link>
           ) : (
             /* ── Logged in ── */
             <div className="group relative">
-              <button className="pt-1 text-neutral-400 hover:text-neutral-600 duration-500 cursor-pointer">
-                <HiOutlineUserCircle size={30} />
+              <button className="pt-1 text-neutral-500 hover:text-neutral-900 duration-500 cursor-pointer">
+                <HiOutlineUserCircle size={32} />
               </button>
 
               <div className="absolute left-0 top-full pt-4 invisible opacity-0 transition-all duration-300 group-hover:visible group-hover:opacity-100 z-50">

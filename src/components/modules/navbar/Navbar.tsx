@@ -1,8 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import Link from "next/link"
-import TopBar from "./components/TopBar";
+import Link from "next/link";
 import MegaMenu from "./components/MegaMenu";
 import SearchBar from "./components/SearchBar";
 import UserActions from "./components/UserActions";
@@ -15,34 +14,33 @@ interface NavbarProps {
 }
 
 export default function Navbar({ isLogin }: NavbarProps) {
-  const [hideTopBar, setHideTopBar] = useState<boolean>(false);
+  const [hideGoldPriceBar, setHideGoldPriceBar] = useState<boolean>(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
 
   useEffect(() => {
-    const handleScroll = () => setHideTopBar(window.scrollY > 80);
+    const handleScroll = () => {
+      setHideGoldPriceBar(window.scrollY > 50);
+    };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   useEffect(() => {
     document.body.style.overflow = mobileMenuOpen ? "hidden" : "";
-    return () => { document.body.style.overflow = ""; };
+    return () => {
+      document.body.style.overflow = "";
+    };
   }, [mobileMenuOpen]);
 
   return (
     <>
-      <nav className="fixed z-50 w-full bg-white transition-all duration-300 md:px-10 lg:px-17 shadow-sm">
-        <div className="md:hidden">
-          <GoldPrice />
-        </div>
+      <nav className="fixed top-0 z-50 w-full bg-white shadow-sm transition-all duration-300">
+        {/* ارسال وضعیت اسکرول به کامپوننت نوار طلا */}
+        <GoldPrice hideGoldPriceBar={hideGoldPriceBar} />
 
-        <div>
-          <TopBar hideTopBar={hideTopBar} />
-        </div>
-
-        <div className="flex h-14 md:h-17 px-5 md:px-0 w-full items-center justify-between">
-
-          {/* ── MOBILE ── */}
+        <div className="flex h-14 md:h-22 w-full items-center justify-between px-5 md:px-10 lg:px-16">
+          
+          {/* ── بخش موبایل ── */}
           <div className="flex md:hidden items-center justify-between w-full">
             <button
               onClick={() => setMobileMenuOpen(true)}
@@ -57,20 +55,19 @@ export default function Navbar({ isLogin }: NavbarProps) {
             </div>
           </div>
 
-          {/* ── DESKTOP ── */}
+          {/* ── بخش دسکتاپ ── */}
           <div className="hidden md:flex w-full items-center justify-between">
             <div className="relative flex items-center gap-8">
+              <h1 className="text-xl font-bold font-yekan text-[#10494b]">گالری امیری</h1>
               <MegaMenu />
-              <div className="flex items-center gap-8 py-1 *:cursor-pointer *:text-sm *:font-semibold *:duration-300 *:hover:text-[#0f676a]">
+              <div className="flex items-center gap-9 py-1 *:cursor-pointer *:text-sm *:md:text-[14.5px] *:font-semibold *:duration-300 *:hover:text-[#085b5e]">
                 <Link href={"/"}>صفحه نخست</Link>
-                <p>بلاگ ها</p>
+                <p>بلاگ‌ها</p>
                 <p>تماس با ما</p>
                 <Link href={"/about-us"}>درباره ما</Link>
               </div>
             </div>
-            <div className="flex items-center gap-6">
-              <GoldPrice />
-              <SearchBar />
+            <div>
               <UserActions isLogin={isLogin} />
             </div>
           </div>

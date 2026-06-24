@@ -12,24 +12,24 @@ import { Pagination, Autoplay } from "swiper/modules";
 const slidesData = [
   {
     id: 1,
-    desktop: "/images/banner1.jpg",
-    mobile: "/images/banner1.webp", // اگر تصویر موبایل ندارید همان desktop را بگذارید
+    desktop: "/images/bannerimg1.png",
+    mobile: "/images/bannerimg1.png", // اگر تصویر موبایل ندارید همان desktop را بگذارید
     alt: "Gold price and online buying banner",
     width: 1920,
     height: 800,
   },
   {
     id: 2,
-    desktop: "/images/banner1.jpg",
-    mobile: "/images/banner1.webp",
+    desktop: "/images/bannerimg1.png",
+    mobile: "/images/bannerimg1.png",
     alt: "New collection banner",
     width: 1920,
     height: 800,
   },
   {
     id: 3,
-    desktop: "/images/banner2.jpg",
-    mobile: "/images/banner2.webp",
+    desktop: "/images/bannerimg1.png",
+    mobile: "/images/bannerimg1.png",
     alt: "New collection banner",
     width: 1920,
     height: 800,
