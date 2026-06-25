@@ -1,10 +1,3 @@
-import { notFound } from "next/navigation";
-import connectToDB from "@/configs/db";
-import { Types } from "mongoose";
-import { getCurrentUser } from "@/utils/auth";
-import { serializeDoc } from "@/lib/serializeProduct";
-import ProductModel from "@/models/Product";
-import "@/models/Comment";
 import ProductGallery from "@/components/templates/product/ProductGallery";
 import ProductHeader from "@/components/templates/product/ProductHeader";
 import WeightSelector from "@/components/templates/product/WeightSelector";
@@ -15,7 +8,14 @@ import RelatedProducts from "@/components/templates/product/RelatedProducts";
 import Breadcrumb from "@/components/modules/breadcrumb/Breadcrumb";
 import Navbar from "@/components/modules/navbar/Navbar"
 import Footer from "@/components/modules/footer/Footer"
+import ProductModel from "@/models/Product";
+import "@/models/Comment";
+import connectToDB from "@/configs/db";
 import { JewelryItem } from "@/components/modules/jewelrycard/JewelryCard";
+import { notFound } from "next/navigation";
+import { Types } from "mongoose";
+import { getCurrentUser } from "@/utils/auth";
+import { serializeDoc } from "@/lib/serializeProduct";
 
 interface PageProps {
   params: Promise<{ id: string }>;
@@ -64,8 +64,6 @@ const ProductDetailPage = async ({ params }: PageProps) => {
     img: doc.img,
     type: doc.type,
   }));
-
-  const relatedProducts = await ProductModel.find({ type: product })
 
   const user = await getCurrentUser();
 
