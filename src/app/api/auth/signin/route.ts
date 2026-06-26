@@ -1,5 +1,6 @@
 import {
   generateAccessToken,
+  generateRefreshToken,
   verifyPassword,
 } from "@/utils/auth";
 import { NextRequest } from "next/server";
@@ -47,7 +48,8 @@ export async function POST(req: NextRequest) {
       userId: user._id.toString(),
       role: user.role,
     });
-    const refreshToken = generateAccessToken({
+
+    const refreshToken = generateRefreshToken({
       userId: user._id.toString(),
       role: user.role,
     });
@@ -62,7 +64,7 @@ export async function POST(req: NextRequest) {
       {
         status: 200,
         headers: {
-          "Set-Cookie": `token=${accessToken}; Path=/; HttpOnly; SameSite=Strict; Max-Age=900`,
+          "Set-Cookie": `token=${accessToken}; Path=/; HttpOnly; SameSite=Lax; Max-Age=${60 * 60 * 24 * 55}`,
         },
       }
     );

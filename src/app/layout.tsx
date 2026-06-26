@@ -2,6 +2,8 @@ import './globals.css';
 import type { Metadata } from "next";
 import localFont from 'next/font/local';
 import ScrollToTop from "@/utils/ScrollToTop"
+import { AuthProvider } from "@/context/AuthContext";
+import { ToastProvider } from "@/components/ui/Toast";
 
 const yekanBakh = localFont({
   src: [
@@ -40,8 +42,12 @@ export default function RootLayout({
   return (
     <html lang="fa" dir="rtl" className={`${yekanBakh.variable}`}>
       <body>
-        {children}
-        <ScrollToTop />
+        <ToastProvider>
+          <AuthProvider>
+            {children}
+            <ScrollToTop />
+          </AuthProvider>
+        </ToastProvider>
       </body>
     </html>
   );
