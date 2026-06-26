@@ -1,16 +1,35 @@
 "use client";
 
-import React from "react";
 import { FiShield, FiPackage, FiTruck } from "react-icons/fi";
 import { HiOutlineBuildingStorefront } from "react-icons/hi2";
+import { useAuth } from "@/context/AuthContext";
 
 interface SellerSidebarProps {
   seller: string;
   price: number;
   stock?: number;
+  productId: string;
 }
 
-const SellerSidebar = ({ seller, price, stock }: SellerSidebarProps) => {
+const SellerSidebar = ({ seller, price, stock, productId }: SellerSidebarProps) => {
+  const { user } = useAuth();
+
+  const addToWishlist = async () => {
+    if (!user?._id) {
+      alert("لطفاً ابتدا وارد شوید");
+      return;
+    }
+
+    const res = await fetch("/api/wishlist", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ product: productId }),
+    });
+
+    const data = await res.json();
+    alert(data.message);
+  };
+  
   return (
     <div className="bg-white rounded-3xl p-4 md:p-6 flex flex-col gap-4">
 
@@ -49,8 +68,16 @@ const SellerSidebar = ({ seller, price, stock }: SellerSidebarProps) => {
       </div>
 
       {/* CTA */}
-      <button className="w-full py-3.5 rounded-2xl bg-[#10494b] text-white text-sm font-bold hover:bg-[#0d3e40] transition-colors">
+      <button className="w-full py-3.5 rounded-xl bg-[#10494b] text-white text-sm font-medium hover:bg-[#0d3e40] transition-colors">
         افزودن به سبد خرید
+      </button>
+
+      {/* CTA */}
+      <button 
+        onClick={addToWishlist}
+        className="w-full py-3.5 rounded-xl border border-[#10494b] text-[#10494b] text-sm font-medium hover:bg-[#0d3e4020] transition-colors"
+      >
+        افزودن به علاقه مندی ها
       </button>
 
       {/* Trust */}

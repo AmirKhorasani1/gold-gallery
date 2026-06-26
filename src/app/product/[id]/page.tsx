@@ -113,6 +113,7 @@ const ProductDetailPage = async ({ params }: PageProps) => {
               seller={product.seller || "گالری طلا"}
               price={product.price}
               stock={product.stock}
+              productId={product.id}
             />
           </div>
         </div>
