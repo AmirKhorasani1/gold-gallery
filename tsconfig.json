@@ -24,6 +24,7 @@
       "@/models/*": ["./models/*"],
       "@/utils/*": ["./src/utils/*"],
       "@/types/*": ["./types/*"],
+      "@/context/*": ["./context/*"],
     }
   },
   "include": [
