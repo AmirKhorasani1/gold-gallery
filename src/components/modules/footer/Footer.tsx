@@ -1,7 +1,7 @@
 "use client";
 
-import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 import {
   FaInstagram,
   FaWhatsapp,
@@ -12,147 +12,106 @@ import {
   HiOutlineMail,
   HiOutlineClock,
 } from "react-icons/hi";
-import { FiPhoneCall } from "react-icons/fi";
+import { FiPhoneCall, FiChevronLeft } from "react-icons/fi";
+
+const categories = [
+  { label: "انگشتر طلا", href: "/products?type=ring" },
+  { label: "دستبند طلا", href: "/products?type=bracelet" },
+  { label: "گردنبند طلا", href: "/products?type=necklace" },
+  { label: "زنجیر طلا", href: "/products?type=chain" },
+  { label: "گوشواره طلا", href: "/products?type=earring" },
+];
+
+const quickLinks = [
+  { label: "فروشگاه", href: "/products" },
+  { label: "سبد خرید", href: "/cart" },
+  { label: "حساب کاربری", href: "/profile" },
+  { label: "علاقه‌مندی‌ها", href: "/wishlist" },
+  { label: "مجله گالری", href: "/blog" },
+];
+
+const legalLinks = [
+  { label: "تماس با ما", href: "/contact-us" },
+  { label: "درباره ما", href: "/about" },
+  { label: "قوانین و مقررات", href: "/terms" },
+  { label: "حریم خصوصی", href: "/privacy" },
+  { label: "سوالات متداول", href: "/faq" },
+];
+
+const socials = [
+  { href: "https://t.me/", icon: <FaTelegramPlane className="w-[17px] h-[17px]" />, label: "تلگرام" },
+  { href: "https://wa.me/", icon: <FaWhatsapp className="w-[17px] h-[17px]" />, label: "واتساپ" },
+  { href: "https://instagram.com/", icon: <FaInstagram className="w-[17px] h-[17px]" />, label: "اینستاگرام" },
+];
+
+const NavList = ({
+  title,
+  items,
+}: {
+  title: string;
+  items: { label: string; href: string }[];
+}) => (
+  <div>
+    <h3 className="text-[14px] font-bold mb-5 text-[#10494b] tracking-wide flex items-center gap-2">
+      <span className="w-1 h-4 rounded-full bg-[#10494b] inline-block" />
+      {title}
+    </h3>
+    <ul className="space-y-3">
+      {items.map(({ label, href }) => (
+        <li key={label}>
+          <Link
+            href={href}
+            className="group flex items-center gap-1.5 text-[13px] text-neutral-500 hover:text-[#10494b] transition-colors duration-200"
+          >
+            <FiChevronLeft className="w-3.5 h-3.5 text-neutral-300 group-hover:text-[#10494b] group-hover:-translate-x-0.5 transition-all duration-200 shrink-0" />
+            {label}
+          </Link>
+        </li>
+      ))}
+    </ul>
+  </div>
+);
 
 const Footer = () => {
   return (
-    <div>
-      {/* ── بخش عکس — تمام‌عرض، مستقل از فوتر ── */}
-      <div className="relative w-full h-100">
-        <Image
-          src="/images/Screenshot_25-5-2026_123419_orelgallery.com.jpeg"
-          alt="گالری طلای لینا"
-          fill
-          quality={100}
-          className="object-cover object-center"
-        />
-      </div>
+    <footer
+      className="w-full bg-neutral-50 border-t border-neutral-100 text-black"
+      dir="rtl"
+    >
+      {/* ── بخش اصلی ── */}
+      <div className="mx-auto px-5 sm:px-8 lg:px-17 pt-14 pb-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[1.6fr_1fr_1fr_1fr_1.2fr] gap-10 lg:gap-8">
 
-      {/* ── فوتر — بکگراند سفید ── */}
-      <footer className="w-full bg-white text-black" dir="rtl">
-
-        {/* ── محتوای اصلی ── */}
-        <div className="w-full px-4 sm:px-8 lg:px-16 xl:px-20 pt-14 pb-0">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-10 lg:gap-12 pb-14">
-
-            {/* ستون ۱: معرفی برند */}
-            <div className="flex flex-col sm:col-span-2 lg:col-span-1">
-              <div className="mb-6">
-                <Image
-                  src="/images/logo-footer.png"
-                  alt="لوگوی لینا"
-                  width={120}
-                  height={60}
-                  className="object-contain"
-                  unoptimized
-                />
-              </div>
-              <p className="text-[13.5px] leading-8 text-black/60 text-justify max-w-[300px]">
-                ما در لینا طلا با عشق، سلیقه و با دقتی وسواس‌گونه،
-                با کنار هم قرار دادن هنر و اصالت، تلاش می‌کنیم
-                تجربه‌ای الهام‌بخش از زیورآلاتی ظریف، ماندگار و
-                دل‌فریب برای شما رقم بزنیم؛ طلا در لحظه‌های مهم
-                زندگی شما معنا پیدا می‌کند.
-              </p>
+          {/* ستون ۱: برند */}
+          <div className="sm:col-span-2 lg:col-span-1">
+            <div className="mb-5">
+              <Image
+                src="/images/logo-footer.png"
+                alt="لوگوی گالری طلا"
+                width={110}
+                height={55}
+                className="object-contain"
+                unoptimized
+              />
             </div>
+            <p className="text-[13px] leading-[2.1] text-neutral-500 text-justify max-w-[280px] mb-7">
+              گالری طلای امیری با سال‌ها تجربه در عرضه زیورآلات اصیل ایرانی،
+              با عشق به هنر طلاسازی و تعهد به اصالت، لحظه‌های ماندگار شما را
+              همراهی می‌کند.
+            </p>
 
-            {/* ستون ۲: اطلاعات تماس */}
+            {/* شبکه‌های اجتماعی */}
             <div>
-              <h3 className="text-[15px] font-semibold mb-6 text-black tracking-wide">
-                اطلاعات تماس
-              </h3>
-              <ul className="space-y-5 text-black/60 text-[13.5px]">
-                <li className="flex items-start gap-3 leading-7">
-                  <HiOutlineLocationMarker className="w-4 h-4 mt-1 shrink-0 text-[#10494b]" />
-                  <span>
-                    تهران، سعادت‌آباد، میدان کتاب، بلوار کوهستان،
-                    خیابان ۲۴، واحد ۸
-                  </span>
-                </li>
-                <li className="flex items-center gap-3">
-                  <FiPhoneCall className="w-4 h-4 shrink-0 text-[#10494b]" />
-                  <span dir="ltr">۰۲۱-۲۲۳۳۸۵۵۶</span>
-                </li>
-                <li className="flex items-center gap-3">
-                  <HiOutlineMail className="w-4 h-4 shrink-0 text-[#10494b]" />
-                  <span dir="ltr" className="text-[13px]">info@linagoldgallery.ir</span>
-                </li>
-                <li className="flex items-center gap-3">
-                  <HiOutlineClock className="w-4 h-4 shrink-0 text-[#10494b]" />
-                  <span>همه‌روزه از ساعت ۱۰ صبح تا ۱۰ شب</span>
-                </li>
-              </ul>
-            </div>
-
-            {/* ستون ۳: دسته‌بندی‌ها */}
-            <div>
-              <h3 className="text-[15px] font-semibold mb-6 text-black tracking-wide">
-                دسته‌بندی‌ها
-              </h3>
-              <ul className="space-y-4 text-[13.5px] text-black/60">
-                {["انگشتر طلا", "دستبند طلا", "گردنبند طلا", "زنجیر طلا", "گوشواره طلا"].map((item) => (
-                  <li key={item}>
-                    <a
-                      href="#"
-                      className="group flex items-center gap-2 hover:text-[#10494b] transition-colors duration-200"
-                    >
-                      <span className="w-1 h-1 rounded-full bg-[#10494b]/40 group-hover:bg-[#10494b] transition-colors duration-200 shrink-0" />
-                      {item}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* ستون ۴: دسترسی سریع */}
-            <div>
-              <h3 className="text-[15px] font-semibold mb-6 text-black tracking-wide">
-                دسترسی سریع
-              </h3>
-              <ul className="space-y-4 text-[13.5px] text-black/60">
-                {["فروشگاه", "سبدخرید", "سوالات متداول", "حساب کاربری", "مجله ارل"].map((item) => (
-                  <li key={item}>
-                    <a
-                      href="#"
-                      className="group flex items-center gap-2 hover:text-[#10494b] transition-colors duration-200"
-                    >
-                      <span className="w-1 h-1 rounded-full bg-[#10494b]/40 group-hover:bg-[#10494b] transition-colors duration-200 shrink-0" />
-                      {item}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* ستون ۵: نمادها و شبکه‌های اجتماعی */}
-            <div>
-              <h3 className="text-[15px] font-semibold mb-6 text-black tracking-wide">
-                نمادهای الکترونیکی
-              </h3>
-
-              <div className="w-[160px] h-[100px] bg-neutral-100 border border-neutral-200 rounded-lg flex items-center justify-center">
-                <Image
-                  src="/images/enamad.png"
-                  alt="نماد اعتماد الکترونیکی"
-                  width={110}
-                  height={60}
-                  className="object-contain"
-                  unoptimized
-                />
-              </div>
-
-              {/* شبکه‌های اجتماعی */}
-              <div className="flex items-center gap-2.5 mt-7">
-                {[
-                  { href: "#", icon: <FaTelegramPlane className="w-4 h-4" />, label: "تلگرام" },
-                  { href: "#", icon: <FaWhatsapp className="w-4 h-4" />, label: "واتساپ" },
-                  { href: "#", icon: <FaInstagram className="w-4 h-4" />, label: "اینستاگرام" },
-                ].map(({ href, icon, label }) => (
+              <p className="text-[12px] text-neutral-400 mb-3">ما را دنبال کنید</p>
+              <div className="flex items-center gap-2">
+                {socials.map(({ href, icon, label }) => (
                   <a
                     key={label}
                     href={href}
                     aria-label={label}
-                    className="w-9 h-9 flex items-center justify-center rounded-lg bg-neutral-100 border border-neutral-200 text-black/50 hover:bg-[#10494b] hover:border-[#10494b] hover:text-white transition-all duration-200"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-9 h-9 flex items-center justify-center rounded-xl bg-white border border-neutral-200 text-neutral-400 hover:bg-[#10494b] hover:border-[#10494b] hover:text-white hover:scale-105 active:scale-95 transition-all duration-200 shadow-sm"
                   >
                     {icon}
                   </a>
@@ -160,24 +119,103 @@ const Footer = () => {
               </div>
             </div>
           </div>
+
+          {/* ستون ۲: دسته‌بندی‌ها */}
+          <NavList title="دسته‌بندی‌ها" items={categories} />
+
+          {/* ستون ۳: دسترسی سریع */}
+          <NavList title="دسترسی سریع" items={quickLinks} />
+
+          {/* ستون ۴: قوانین و پشتیبانی */}
+          <NavList title="قوانین و پشتیبانی" items={legalLinks} />
+
+          {/* ستون ۵: تماس + نماد */}
+          <div>
+            <h3 className="text-[14px] font-bold mb-5 text-[#10494b] tracking-wide flex items-center gap-2">
+              <span className="w-1 h-4 rounded-full bg-[#10494b] inline-block" />
+              اطلاعات تماس
+            </h3>
+            <ul className="space-y-4 text-[13px] text-neutral-500 mb-7">
+              <li className="flex items-start gap-2.5 leading-[1.9]">
+                <HiOutlineLocationMarker className="w-4 h-4 mt-0.5 shrink-0 text-[#10494b]" />
+                <span>تهران، سعادت‌آباد، میدان کتاب، بلوار کوهستان، خیابان ۲۴، واحد ۸</span>
+              </li>
+              <li>
+                <a
+                  href="tel:02122338556"
+                  className="flex items-center gap-2.5 hover:text-[#10494b] transition-colors duration-200 group"
+                >
+                  <FiPhoneCall className="w-4 h-4 shrink-0 text-[#10494b]" />
+                  <span dir="ltr" className="group-hover:tracking-wide transition-all duration-200">۰۲۱-۲۲۳۳۸۵۵۶</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  href="mailto:info@linagoldgallery.ir"
+                  className="flex items-center gap-2.5 hover:text-[#10494b] transition-colors duration-200"
+                >
+                  <HiOutlineMail className="w-4 h-4 shrink-0 text-[#10494b]" />
+                  <span dir="ltr" className="text-[12.5px]">info@linagoldgallery.ir</span>
+                </a>
+              </li>
+              <li className="flex items-center gap-2.5">
+                <HiOutlineClock className="w-4 h-4 shrink-0 text-[#10494b]" />
+                <span>همه‌روزه ۱۰ صبح تا ۱۰ شب</span>
+              </li>
+            </ul>
+
+            {/* نماد اعتماد */}
+            <div className="w-[100px] h-[68px] bg-white border border-neutral-200 rounded-xl flex items-center justify-center shadow-sm hover:shadow-md transition-shadow duration-200">
+              <Image
+                src="/images/enamad.png"
+                alt="نماد اعتماد الکترونیکی"
+                width={80}
+                height={50}
+                className="object-contain"
+                unoptimized
+              />
+            </div>
+          </div>
+
         </div>
+      </div>
 
-        {/* ── خط جداکننده ── */}
-        <div className="w-full h-px bg-neutral-200" />
-
-        {/* ── نوار کپی‌رایت ── */}
-        <div className="w-full px-4 sm:px-8 lg:px-16 xl:px-20 py-5">
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-2 text-[12.5px] text-black/40">
-            <p className="text-center sm:text-right">
-              کلیه حقوق مادی و معنوی این سایت برای گالری طلای لینا محفوظ است
-            </p>
-            <p className="text-center sm:text-left whitespace-nowrap">
-              طراحی و توسعه: گروه طراحی نارون
-            </p>
+      {/* ── نوار تخفیف / خبرنامه ── */}
+      <div className="border-t border-neutral-200 bg-white">
+        <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-14 py-5 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <p className="text-[13px] text-neutral-500 text-center sm:text-right">
+            🎁 با ثبت ایمیل، از تخفیف‌های ویژه و جدیدترین محصولات باخبر شوید
+          </p>
+          <div className="flex w-full sm:w-auto gap-2">
+            <input
+              type="email"
+              placeholder="ایمیل شما..."
+              dir="ltr"
+              className="flex-1 sm:w-56 text-[13px] px-4 py-2.5 rounded-xl border border-neutral-200 outline-none focus:border-[#10494b] focus:ring-2 focus:ring-[#10494b]/10 transition-all duration-200 bg-neutral-50"
+            />
+            <button className="px-5 py-2.5 bg-[#10494b] text-white text-[13px] font-semibold rounded-xl hover:bg-[#0d3e40] active:scale-95 transition-all duration-200 whitespace-nowrap">
+              عضویت
+            </button>
           </div>
         </div>
-      </footer>
-    </div>
+      </div>
+
+      {/* ── کپی‌رایت ── */}
+      <div className="border-t border-neutral-100 bg-neutral-50">
+        <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-14 py-4 flex flex-col sm:flex-row items-center justify-between gap-2 text-[12px] text-neutral-400">
+          <p className="text-center sm:text-right">
+            © ۱۴۰۴ — کلیه حقوق مادی و معنوی این سایت برای گالری طلای امیری محفوظ است
+          </p>
+          <div className="flex items-center gap-4">
+            <Link href="/terms" className="hover:text-[#10494b] transition-colors duration-200">قوانین</Link>
+            <Link href="/privacy" className="hover:text-[#10494b] transition-colors duration-200">حریم خصوصی</Link>
+            <span className="text-neutral-300">|</span>
+            <p className="whitespace-nowrap">طراحی:  امیری</p>
+          </div>
+        </div>
+      </div>
+
+    </footer>
   );
 };
 
