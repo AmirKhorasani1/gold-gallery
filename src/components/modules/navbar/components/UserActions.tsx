@@ -12,6 +12,7 @@ import { TbMessage } from "react-icons/tb";
 import { TbHeart } from "react-icons/tb";
 import { TbSettings } from "react-icons/tb";
 import { TbBox } from "react-icons/tb";
+import { IoHeartOutline } from "react-icons/io5";
 
 interface UserActionsProps {
   isLogin: boolean;
@@ -28,6 +29,16 @@ const UserActions = ({ isLogin, mobileCartOnly = false }: UserActionsProps) => {
 
   return (
     <div className="flex items-center gap-7">
+
+      <Link
+        href="/wishlist"
+        className="relative text-neutral-500 hover:text-neutral-900 duration-500"
+      >
+        <IoHeartOutline size={29} />
+        <span className="absolute -left-1.5 md:-left-2 top-0 md:-top-1 w-3.5 h-3.5 md:h-4.5 md:w-4.5 rounded-4xl bg-[#10494b] pt-1 text-[10px] md:text-[11.5px] text-white flex items-center justify-center">
+          ۲
+        </span>
+      </Link>
 
       {/* ================= CART ================= */}
       <div className="group relative">
@@ -106,7 +117,7 @@ const UserActions = ({ isLogin, mobileCartOnly = false }: UserActionsProps) => {
             /* ── Not logged in ── */
             <Link
               href="/login-register"
-              className="flex w-36 cursor-pointer items-center justify-center gap-1.5 rounded-xl py-3 text-sm font-semibold border border-[#10494b] text-[#10494b] hover:bg-[#10494b] hover:text-white transition duration-300"
+              className="flex w-36 cursor-pointer items-center justify-center gap-1.5 rounded-lg py-3 text-sm font-semibold border border-[#10494b] text-[#10494b] hover:bg-[#10494b] hover:text-white transition duration-300"
             >
               <LuLogIn size={22} />
               ورود | ثبت نام

@@ -5,7 +5,6 @@ import Link from "next/link";
 import MegaMenu from "./components/MegaMenu";
 import SearchBar from "./components/SearchBar";
 import UserActions from "./components/UserActions";
-import GoldPrice from "./components/GoldPrice";
 import MobileMenu from "./components/MobileMenu";
 import { RxHamburgerMenu } from "react-icons/rx";
 
@@ -31,14 +30,11 @@ export default function Navbar({ isLogin }: NavbarProps) {
       document.body.style.overflow = "";
     };
   }, [mobileMenuOpen]);
-
+  
   return (
     <>
-      <nav className="fixed top-0 z-50 w-full bg-white shadow-sm transition-all duration-300">
-        {/* ارسال وضعیت اسکرول به کامپوننت نوار طلا */}
-        <GoldPrice hideGoldPriceBar={hideGoldPriceBar} />
-
-        <div className="flex h-14 md:h-22 w-full items-center justify-between px-5 md:px-10 lg:px-16">
+      <nav className="fixed top-0 z-50 w-full bg-white border-b border-neutral-200 transition-all duration-300">
+        <div className="flex h-14 md:h-25 w-full items-center justify-between px-5 md:px-10 lg:px-16">
           
           {/* ── بخش موبایل ── */}
           <div className="flex md:hidden items-center justify-between w-full">
@@ -63,7 +59,7 @@ export default function Navbar({ isLogin }: NavbarProps) {
               <div className="flex items-center gap-9 py-1 *:cursor-pointer *:text-sm *:md:text-[14.5px] *:font-semibold *:duration-300 *:hover:text-[#085b5e]">
                 <Link href={"/"}>صفحه نخست</Link>
                 <p>بلاگ‌ها</p>
-                <p>تماس با ما</p>
+                <Link href={"/contact-us"}>تماس با ما</Link>
                 <Link href={"/about-us"}>درباره ما</Link>
               </div>
             </div>
