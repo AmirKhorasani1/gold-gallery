@@ -7,7 +7,7 @@ import Footer from "@/components/modules/footer/Footer";
 import Breadcrumb from "@/components/modules/breadcrumb/Breadcrumb";
 import { getCurrentUser } from "@/utils/auth";
 
-const  AboutPage = async () => {
+const AboutPage = async () => {
   const user = await getCurrentUser();
 
   return (
