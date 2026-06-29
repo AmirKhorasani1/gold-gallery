@@ -1,101 +1,96 @@
 "use client";
 
-import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
-
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
-
 import { Pagination, Autoplay } from "swiper/modules";
 
-const slidesData = [
-  {
-    id: 1,
-    desktop: "/images/bannerimg1.png",
-    mobile: "/images/bannerimg1.png", // اگر تصویر موبایل ندارید همان desktop را بگذارید
-    alt: "Gold price and online buying banner",
-    width: 1920,
-    height: 800,
-  },
-  {
-    id: 2,
-    desktop: "/images/bannerimg1.png",
-    mobile: "/images/bannerimg1.png",
-    alt: "New collection banner",
-    width: 1920,
-    height: 800,
-  },
-  {
-    id: 3,
-    desktop: "/images/bannerimg1.png",
-    mobile: "/images/bannerimg1.png",
-    alt: "New collection banner",
-    width: 1920,
-    height: 800,
-  },
-];
+import "swiper/css";
+import "swiper/css/pagination";
+
+/* ─── اسلاید ۱ ─── */
+const Slide1 = () => (
+  <div className="relative w-full h-138 pt-20 overflow-hidden"
+    style={{ background: "linear-gradient(135deg, #022a2c 0%, #10494b 50%, #022a2c 100%)" }}
+  >
+    <div className="w-full max-w-6xl mx-auto flex flex-col justify-center items-center *:text-9xl *:font-black font-yekan">
+      <img
+        className="absolute bottom-7 w-85 z-10"
+        src="/images/Screenshot 2026-06-26 at 03-28-24 خرید آنلاین طلا گالری طلا ارل - اصالت به سبک ارل.png"
+        alt="طلا"
+      />
+        <h1 className="text-neutral-200">زربــــــــــــــــــــــــــــــــان</h1>
+        <h1 className="pr-50 text-[#ffd07e]">پـــــــــــــــــــــــــــــــارس</h1>
+        <h1 className="text-[#ffe6ba]">تمــــــــــــــــــــــــــــــدن</h1>
+    </div>
+  </div>
+);
+
+/* ─── اسلاید ۲ ─── */
+const Slide2 = () => (
+  <div className="relative w-full h-138 overflow-hidden"
+    style={{ background: "linear-gradient(90deg, #022a2c, #10494b" }}
+  >
+    {/* نوشته‌های پس‌زمینه */}
+    <div className="w-full max-w-7xl mx-auto flex justify-between items-center">
+      <div>
+        
+      </div>
+      <div>
+        
+      </div>
+    </div>
+  </div>
+);
+
+const slides = [Slide1, Slide2];
 
 export default function Banner() {
   return (
-    <section className="w-full bg-white pt-36 md:pt-31">
+    <section className="w-full pt-36 md:pt-25">
       <Swiper
         modules={[Pagination, Autoplay]}
         pagination={{ clickable: true }}
-        autoplay={{ delay: 9000, disableOnInteraction: false }}
+        autoplay={{ delay: 5000, disableOnInteraction: false }}
         loop
-        className="w-full relative"
+        className="w-full relative banner-swiper"
       >
-        {slidesData.map((slide) => (
-          <SwiperSlide key={slide.id} className="relative w-full">
-            {/* Desktop image */}
-            <Image
-              src={slide.desktop}
-              alt={slide.alt}
-              width={slide.width}
-              height={slide.height}
-              className="hidden sm:block w-full h-auto"
-              priority={slide.id === 1}
-              quality={100}
-              unoptimized
-            />
-            {/* Mobile image */}
-            <Image
-              src={slide.mobile}
-              alt={slide.alt}
-              width={750}
-              height={750}
-              className="block sm:hidden w-full h-auto"
-              priority={slide.id === 1}
-              quality={100}
-              unoptimized
-            />
+        {slides.map((SlideComponent, i) => (
+          <SwiperSlide key={i}>
+            <SlideComponent />
           </SwiperSlide>
         ))}
       </Swiper>
 
       <style jsx global>{`
-        .swiper-pagination {
-          bottom: 5px !important;
+        .banner-swiper .swiper-pagination {
+          bottom: 18px !important;
+          left: auto !important;
+          right: 24px !important;
+          width: auto !important;
+          display: flex;
+          gap: 5px;
+          justify-content: flex-end;
         }
-
-        .swiper-pagination-bullet {
-          width: 8px;
-          height: 8px;
-          background: #ffffff50;
+        .banner-swiper .swiper-pagination-bullet {
+          width: 9px;
+          height: 9px;
+          background: rgba(255, 255, 255, 0.35);
           opacity: 1;
+          border-radius: 50%;
+          transition: background 0.3s, transform 0.3s;
         }
-
-        .swiper-pagination-bullet-active {
-          background: #fff;
+        .banner-swiper .swiper-pagination-bullet-active {
+          background: #ffffff;
+          width: 24px;
+          height: 8px;
+          border-radius: 10px;
+          transform: scale(1.3);
         }
-
         @media (max-width: 640px) {
-          .swiper-pagination {
-            bottom: 8px !important;
+          .banner-swiper .swiper-pagination {
+            right: 16px !important;
+            bottom: 12px !important;
           }
-
-          .swiper-pagination-bullet {
+          .banner-swiper .swiper-pagination-bullet {
             width: 6px;
             height: 6px;
           }

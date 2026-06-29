@@ -132,13 +132,13 @@ const UserActions = ({ isLogin, mobileCartOnly = false }: UserActionsProps) => {
               <div className="absolute left-0 top-full pt-4 invisible opacity-0 transition-all duration-300 group-hover:visible group-hover:opacity-100 z-50">
                 <div className="w-60 rounded-2xl bg-white border border-neutral-200 shadow-xs overflow-hidden flex flex-col p-2 gap-1 text-sm font-medium text-neutral-700">
 
-                  <div className="flex items-center gap-3 w-full p-3 border-b border-black/10">
-                    <div className="w-12 h-12 rounded-full bg-black/15" />
+                  <Link href={"/user-dashboard"} className="flex items-center gap-3 w-full p-3 border border-neutral-200 bg-neutral-100 hover:bg-neutral-200/60 rounded-xl cursor-pointer">
+                    <div className="w-13 h-13 rounded-full bg-black/15" />
                     <div className="flex flex-col gap-2">
-                      <h1 className="text-sm font-bold text-neutral-800">نام و نام خانوادگی</h1>
+                      <h1 className="text-sm font-semibold text-neutral-800">نام و نام خانوادگی</h1>
                       <p className="text-xs text-neutral-500">۰۹۱۳ ۹۶۳ ۴۷۰۹</p>
                     </div>
-                  </div>
+                  </Link>
 
                   <Link href="/profile/orders" className="flex items-center gap-3 p-2.5 rounded-xl hover:bg-neutral-100 hover:text-[#10494b] transition-colors mt-1 font-medium">
                     <TbBox size={24} /> سفارشات من
