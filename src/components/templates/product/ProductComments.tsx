@@ -9,13 +9,15 @@ export interface CommentItem {
   username: string;
   body: string;
   score: number;
-  isAccept: boolean
+  isAccept: boolean;
   date?: string;
 }
 
 interface ProductCommentsProps {
   productId: string;
   initialComments: CommentItem[];
+  userEmail: string;
+  userName: string;
 }
 
 const StarRating = ({ rating }: { rating: number }) => (
@@ -35,7 +37,7 @@ const formatDate = (iso?: string) => {
   }
 };
 
-const ProductComments = ({ productId, initialComments }: ProductCommentsProps) => {
+const ProductComments = ({ productId, initialComments, userEmail, userName }: ProductCommentsProps) => {
   const [comments, setComments] = useState<CommentItem[]>(initialComments);
 
   const acceptedComments = comments.filter((comment) => comment.isAccept);
@@ -46,14 +48,10 @@ const ProductComments = ({ productId, initialComments }: ProductCommentsProps) =
 
   return (
     <div className="grid md:grid-cols-2 gap-10 md:gap-16">
-      {/* Comments list */}
       <div>
         <h2 className="text-lg md:text-xl font-bold text-gray-800 mb-6">
-          دیدگاه کاربران (
-            {comments.filter(comment => comment.isAccept).length}
-          )
+          دیدگاه کاربران ({comments.filter((c) => c.isAccept).length})
         </h2>
-
         <div className="flex flex-col gap-5">
           {acceptedComments.length > 0 ? (
             acceptedComments.map((comment) => (
@@ -67,15 +65,17 @@ const ProductComments = ({ productId, initialComments }: ProductCommentsProps) =
               </div>
             ))
           ) : (
-            <p className="text-sm text-neutral-500">
-              هنوز دیدگاهی برای این محصول ثبت نشده است.
-            </p>
+            <p className="text-sm text-neutral-500">هنوز دیدگاهی برای این محصول ثبت نشده است.</p>
           )}
         </div>
       </div>
 
-      {/* Comment form */}
-      <CommentForm productId={productId} onCommentAdded={handleCommentAdded} />
+      <CommentForm
+        productId={productId}
+        onCommentAdded={handleCommentAdded}
+        userEmail={userEmail}
+        userName={userName}
+      />
     </div>
   );
 };

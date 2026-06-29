@@ -15,6 +15,8 @@ interface ProductTabsProps {
   description?: string;
   specs?: ProductFeature[];
   comments?: CommentItem[];
+  userEmail: string;
+  userName: string;
 }
 
 const tabs: { key: TabKey; label: string }[] = [
@@ -24,12 +26,11 @@ const tabs: { key: TabKey; label: string }[] = [
   { key: "questions", label: "پرسش‌ها" },
 ];
 
-const ProductTabs = ({ productId, description, specs = [], comments = [] }: ProductTabsProps) => {
+const ProductTabs = ({ productId, description, specs = [], comments = [], userEmail, userName }: ProductTabsProps) => {
   const [activeTab, setActiveTab] = useState<TabKey>("description");
 
   return (
     <div>
-      {/* Tab headers */}
       <div className="flex items-center gap-1 md:gap-2 border-b border-neutral-200 overflow-x-auto">
         {tabs.map((tab) => (
           <button
@@ -46,7 +47,6 @@ const ProductTabs = ({ productId, description, specs = [], comments = [] }: Prod
         ))}
       </div>
 
-      {/* Tab content */}
       <div className="pt-6">
         {activeTab === "description" && (
           <div>
@@ -85,7 +85,12 @@ const ProductTabs = ({ productId, description, specs = [], comments = [] }: Prod
         )}
 
         {activeTab === "comments" && (
-          <ProductComments productId={productId} initialComments={comments} />
+          <ProductComments
+            productId={productId}
+            initialComments={comments}
+            userEmail={userEmail}
+            userName={userName}
+          />
         )}
 
         {activeTab === "questions" && (

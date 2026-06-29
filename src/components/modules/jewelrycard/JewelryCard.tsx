@@ -9,7 +9,7 @@ export interface JewelryItem {
   title: string;
   price: number;
   weight: number;
-  img: string;
+  img?: string;
   type: string;
   colors?: string[];
   colorsName?: string[];

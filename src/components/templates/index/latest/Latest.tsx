@@ -6,11 +6,11 @@ import Link from "next/link"
 import { HiArrowLeft } from "react-icons/hi";
 
 interface LatestProductsProps {
-  products: JewelryItem[];
+  products?: JewelryItem[];
 }
 
 const Latest = ({ products }: LatestProductsProps) => {
-  const latest = db.products.slice(-8).reverse();
+  const latest = products ? products.slice(-8).reverse() : db.products.slice(-8).reverse();
 
   return (
     <div className="w-full py-6">
