@@ -7,7 +7,7 @@ import CollectionIntro from "@/components/templates/index/iran-collection/Collec
 import CollectionProducts from "@/components/templates/index/iran-collection/CollectionProducts";
 import Latest from "@/components/templates/index/latest/Latest";
 import WhyUs from "@/components/templates/index/why-us/WhyUs";
-import { getCurrentUser } from "@/utils/auth";
+import { getCurrentUser } from "@/utils/serverHelpers";
 
 const Home = async () => {
   const user = await getCurrentUser();

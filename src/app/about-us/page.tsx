@@ -5,7 +5,7 @@ import { GiDiamondRing } from "react-icons/gi";
 import Navbar from "../../components/modules/navbar/Navbar";
 import Footer from "@/components/modules/footer/Footer";
 import Breadcrumb from "@/components/modules/breadcrumb/Breadcrumb";
-import { getCurrentUser } from "@/utils/auth";
+import { getCurrentUser } from "@/utils/serverHelpers";
 
 const AboutPage = async () => {
   const user = await getCurrentUser();

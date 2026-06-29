@@ -1,5 +1,5 @@
 import Navbar from '@/components/modules/navbar/Navbar'
-import { getCurrentUser } from '@/utils/auth'
+import { getCurrentUser } from '@/utils/serverHelpers'
 import Breadcrumb from '@/components/modules/breadcrumb/Breadcrumb'
 import Footer from '@/components/modules/footer/Footer'
 import ContactForm from '@/components/templates/contact-us/ContactForm'

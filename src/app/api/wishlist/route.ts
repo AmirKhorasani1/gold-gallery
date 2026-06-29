@@ -2,13 +2,12 @@ import { NextRequest, NextResponse } from "next/server";
 import mongoose from "mongoose";
 import WishlistModel from "@/models/Wishlist";
 import connectToDB from "@/configs/db";
-import { getCurrentUser } from "@/utils/auth"; // ✅ اضافه شد
+import { getCurrentUser } from "@/utils/serverHelpers";
 
 export async function POST(req: NextRequest) {
   try {
     await connectToDB();
 
-    // ✅ user از توکن خونده می‌شه، نه از body
     const currentUser = await getCurrentUser();
     if (!currentUser) {
       return NextResponse.json(
@@ -18,7 +17,7 @@ export async function POST(req: NextRequest) {
     }
 
     const body = await req.json();
-    const { product } = body; // ✅ فقط product از body
+    const { product } = body;
 
     if (!product) {
       return NextResponse.json(

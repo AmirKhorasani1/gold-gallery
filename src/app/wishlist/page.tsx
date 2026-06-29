@@ -3,7 +3,7 @@ import { GoHeart } from "react-icons/go";
 import Navbar from "../../components/modules/navbar/Navbar";
 import Footer from "@/components/modules/footer/Footer";
 import Breadcrumb from "@/components/modules/breadcrumb/Breadcrumb";
-import { getCurrentUser } from "@/utils/auth";
+import { getCurrentUser } from "@/utils/serverHelpers";
 import connectToDB from "@/configs/db";
 import WishlistModel from "@/models/Wishlist";
 import JewelryCard from "@/components/modules/jewelrycard/JewelryCard";
